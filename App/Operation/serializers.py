@@ -25,7 +25,7 @@ class ShowOperation(serializers.ModelSerializer):
             return None
     def to_representation(self, instance):
         data = super().to_representation(instance)
-        data.pop('role')
+        data.pop('role')  # ('role', '0123')
         return data
     class Meta:
         model = Operation

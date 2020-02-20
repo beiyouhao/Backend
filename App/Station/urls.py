@@ -8,4 +8,5 @@ app_name="Station"
 urlpatterns = [
     path('get_station/', views.get_station, name='get_station'),
     path('edit_station/', views.edit_station, name='edit_station'),
+    path('lock_station/', views.lock_station, name='lock_station'),
 ]

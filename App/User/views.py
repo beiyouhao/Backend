@@ -17,9 +17,10 @@ from .serializers import UserSerializer, AdminUser, RegisterUser
 # 注册
 @api_view(['POST'])
 def register(request):
+    print(request.data)  # check role (ok)
     user_slzr = RegisterUser(data=request.data)
     if user_slzr.is_valid():
-        user_slzr.save()
+        user_slzr.save()  # role没save进去(user_slzr.role is ok)
         return JsonResponse(data=user_slzr.data, safe=False)
     else:
         return JsonResponse(data=user_slzr.errors)
@@ -30,7 +31,7 @@ def register(request):
 def view_profile(request):
     user = User.objects.get(id=request.user.id)
     user_slzr = UserSerializer(instance=user)
-    return JsonResponse(data=user_slzr.data)
+    return JsonResponse(data=user_slzr.data)  # {'username': 'maomao3', 'role': 2}
 
 # 需要管理员权限
 @api_view(['GET', 'POST'])

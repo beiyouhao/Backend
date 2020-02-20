@@ -8,8 +8,11 @@ from .models import get_flow_data
 
 @api_view(['POST'])
 def show_flow(request):
+    print(request.data)
     data = get_flow_data(year=request.data["year"],
                          month=request.data["month"],
                          dates=request.data["dates"], 
                          stations=request.data["stations"])
+    if data == "":
+        return JsonResponse(data={"errors": "StationFlow Not Exist"})
     return JsonResponse(data=data, safe=False)

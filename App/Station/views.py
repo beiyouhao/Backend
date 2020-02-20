@@ -38,4 +38,17 @@ def edit_station(request):
         return JsonResponse(data=slzr.data, safe=False)
     else:
         return JsonResponse(slzr.errors)
-    
+
+# input format
+# {"station_info":{"station_name":"xxx"}}
+@api_view(['POST'])
+def lock_station(request):
+    data = request.data["station_info"]
+    try:
+        station = Station.objects.get(station_name=data["station_name"])
+        station.delete()
+        return JsonResponse(data={"success": "locked station"})
+    except KeyError:
+        return JsonResponse(data={"errors": "Check Json Parameter"})
+    except Station.DoesNotExist:
+        return JsonResponse(data={"errors": "station not existed"})

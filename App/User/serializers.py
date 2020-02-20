@@ -30,9 +30,18 @@ class RegisterUser(serializers.ModelSerializer):
         menu = ShowOperation(menu_roots, many=True, context={"role": self.instance.role})
         return menu.data
     def create(self, data):
+        print(data["role"])  # check role again (ok)
         user = User.objects.create_user(username=data["username"])
         user.set_password(data["password"])
         user.save()
+
+        # # added 0215 (database ok)
+        # user_role = User.objects.get(username=data["username"])
+        # user_role.role = data["role"]
+        # user_role.save()
+
+        # another try
+        # user1 = User.objects.create(username=data["username"], password=data["password"], role=data["role"])
         return user
     def to_representation(self, instance):
         data = super().to_representation(instance)
