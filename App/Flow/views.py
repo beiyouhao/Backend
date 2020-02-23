@@ -11,7 +11,7 @@ import datetime
 @api_view(['POST'])
 def show_flow(request):
     cur_day = datetime.datetime.now().day
-    pred = np.load('/Users/wanghao/Downloads/Multitask-learning2/mae_compare/predict_day.npy') * 3000
+    pred = np.load('/Users/wanghao/Downloads/Multitask-learning2/mae_compare/predict_day_25_1-0.2_0219.npy') * 3000
     pred = np.around(pred, 0)
     pred[pred < 2] = 0  # 玄学
     def trans(inlist):
