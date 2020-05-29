@@ -46,7 +46,7 @@ numpy==1.16.4
 2. 在```/Backend/```下执行
     ```python
     python manage.py makemigrations
-    python maange.py migrate
+    python manage.py migrate
     ```
 3. 执行如下命令以测试各项```API```
    ```python
